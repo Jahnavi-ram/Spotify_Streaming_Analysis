@@ -107,3 +107,39 @@
 - Several songs with **high skips** still remain popular in terms of playtime, suggesting listeners might not finish them.
 - **"Caution"** and **"The Boxer"** are among the more frequently skipped tracks.
 
+
+## **4️⃣ Top 10 Most Skipped Artists**
+✅ **Question:** Which artists get skipped the most?
+
+### **📌 Method**
+- **Tool Used:** Excel Pivot Table
+- **Steps Taken:**
+  - Created a Pivot Table:
+    - **Rows:** `artist_name`
+    - **Values:** `Count of skipped_boolean`
+  - Sorted `skipped_boolean` in **descending order**.
+  - Filtered **Top 10 Skipped Artists**.
+  - Created a **Bar Chart** for visualization.
+
+### **📊 Top 10 Most Skipped Artists**
+| Rank | Artist Name    | Skip Count |
+|------|----------------|------------|
+| 1    | The Beatles    | 13,621     |
+| 2    | The Killers    | 6,878      |
+| 3    | John Mayer     | 4,855      |
+| 4    | Bob Dylan      | 3,814      |
+| 5    | Paul McCartney | 2,697      |
+| 6    | Led Zeppelin   | 2,482      |
+| 7    | Johnny Cash    | 2,478      |
+| 8    | The Rolling Stones | 2,390  |
+| 9    | Radiohead      | 2,305      |
+| 10   | The Black Keys | 2,231      |
+
+### **📈 Visualization**
+![Most Skipped Artists](images/most_skipped_artists.png)
+
+### **🔍 Observations**
+- **The Beatles** have the highest skip count, making them the most skipped artist in this dataset.
+- **The Killers** and **John Mayer** also appear as artists with high skip rates, suggesting that despite being popular, listeners tend to skip their songs often.
+- **Rock bands** like **Radiohead, Led Zeppelin,** and **The Rolling Stones** are more likely to be skipped.
+
