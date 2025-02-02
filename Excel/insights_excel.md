@@ -35,6 +35,53 @@
 - Movie soundtracks (e.g., *Lord of the Rings* tracks) dominate the **top spots**.
 - Rock & alternative songs (*The Killers, The Strokes*) have high engagement.
 
+## **2️⃣ Most Played Artists**
+✅ **Question:** Which artists have the highest total playtime?
+
+### **📌 Method**
+- **Tool Used:** Excel Pivot Table
+- **Steps Taken:**
+  - Created a Pivot Table:
+    - **Rows:** `artist_name`
+    - **Values:** `Sum of ms_played`
+  - Sorted `ms_played` in **descending order**.
+  - Filtered **Top 10 Artists**.
+  - Created a **Bar Chart** for visualization.
+
+### **📊 Top 10 Most Played Artists**
+| Rank | Artist Name | Total Playtime (ms) |
+|------|------------|---------------------|
+| 1 | The Beatles | 1,210,184,552 |
+| 2 | The Killers | 1,059,556,516 |
+| 3 | John Mayer | 725,219,443 |
+| 4 | Bob Dylan | 569,456,936 |
+| 5 | Paul McCartney | 357,354,370 |
+| 6 | Howard Shore | 348,930,675 |
+| 7 | The Strokes | 317,508,419 |
+| 8 | The Rolling Stones | 307,917,009 |
+| 9 | Pink Floyd | 260,531,842 |
+| 10 | Led Zeppelin | 248,338,279 |
+
+### **📈 Visualization**
+![Most Played Artists](images/most_played_artists.png)
+
+### **🔍 Observations**
+- **The Beatles** have the highest total playtime, making them the most popular artist in this dataset.
+- **The Killers & John Mayer** follow closely behind.
+- **Howard Shore’s presence** suggests a strong interest in soundtracks (*Lord of the Rings*).
+- Rock and alternative bands dominate the **top 10**.
+
+---
+
+✅ **What You Need to Do Now**  
+1. **Save this update in `Excel/insights_excel.md`**  
+2. **Upload the bar chart image as `Excel/images/most_played_artists.png`**  
+
+---
+
+🎯 **Send me the 3rd insight now!**
+  
+
 
 
 
