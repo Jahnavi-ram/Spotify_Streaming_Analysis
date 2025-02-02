@@ -71,17 +71,39 @@
 - **Howard Shore’s presence** suggests a strong interest in soundtracks (*Lord of the Rings*).
 - Rock and alternative bands dominate the **top 10**.
 
----
 
-✅ **What You Need to Do Now**  
-1. **Save this update in `Excel/insights_excel.md`**  
-2. **Upload the bar chart image as `Excel/images/most_played_artists.png`**  
+## **3️⃣ Top 10 Most Skipped Songs**
+✅ **Question:** Which songs get skipped the most?
 
----
+### **📌 Method**
+- **Tool Used:** Excel Pivot Table
+- **Steps Taken:**
+  - Created a Pivot Table:
+    - **Rows:** `track_name`
+    - **Values:** `Count of skipped_boolean`
+  - Sorted `skipped_boolean` in **descending order**.
+  - Filtered **Top 10 Skipped Songs**.
+  - Created a **Bar Chart** for visualization.
 
-🎯 **Send me the 3rd insight now!**
-  
+### **📊 Top 10 Most Skipped Songs**
+| Rank | Song Name                                     | Skip Count |
+|------|-----------------------------------------------|------------|
+| 1    | The Boxer                                     | 135        |
+| 2    | Come Together - Remastered 2009              | 137        |
+| 3    | Concerning Hobbits                           | 142        |
+| 4    | All These Things That I've Done               | 142        |
+| 5    | For What It's Worth                           | 146        |
+| 6    | 19 Dias y 500 Noches - En Directo             | 148        |
+| 7    | Caution                                       | 164        |
+| 8    | Dying Breed                                   | 166        |
+| 9    | In the Blood                                  | 181        |
+| 10   | Ode To The Mets                               | 207        |
 
+### **📈 Visualization**
+![Most Skipped Songs](images/most_skipped_songs.png)
 
-
+### **🔍 Observations**
+- **"Ode To The Mets"** is the **most skipped song**, but it still ranks as one of the most played songs.
+- Several songs with **high skips** still remain popular in terms of playtime, suggesting listeners might not finish them.
+- **"Caution"** and **"The Boxer"** are among the more frequently skipped tracks.
 
