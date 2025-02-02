@@ -143,3 +143,47 @@
 - **The Killers** and **John Mayer** also appear as artists with high skip rates, suggesting that despite being popular, listeners tend to skip their songs often.
 - **Rock bands** like **Radiohead, Led Zeppelin,** and **The Rolling Stones** are more likely to be skipped.
 
+
+## **5️⃣ Artist Dependency on Top Songs**
+✅ **Question:** Is an artist's popularity due to one hit or multiple songs?
+
+### **📌 Method**
+- **Tool Used:** Excel Pivot Table
+- **Steps Taken:**
+  - Created a Pivot Table:
+    - **Rows:** `artist_name` + `track_name`
+    - **Values:** `Sum of ms_played`
+  - **Calculated:** Total playtime of each artist and their tracks.
+  - This analysis shows whether an artist's total playtime is driven by one major hit or multiple tracks.
+  
+### **🔍 Observations**
+- In this analysis, we reviewed artists and their track playtime to see if the total playtime is contributed by a few top tracks or is spread across multiple songs.
+- Based on this data, we couldn’t calculate the **% contribution** of top songs using Excel due to complexity.
+- **Next Step:** For more detailed insights and further analysis on **hit songs** and **artist dependency**, we decided to proceed with **SQL**. This will allow for easier calculations of metrics like top 3 songs' playtime percentage.
+
+---
+
+## **6️⃣ Artist Dependency Based on Top 3 Tracks**
+✅ **Question:** How does an artist's ranking change when we only consider their top 3 tracks?
+
+### **📌 Method**
+- **Tool Used:** Excel Pivot Table
+- **Steps Taken:**
+  - Created a Pivot Table:
+    - **Rows:** `artist_name`
+    - **Values:** `Sum of ms_played`
+    - Filtered for **Top 3 tracks** per artist.
+  - This helped us analyze if an artist’s ranking in terms of playtime changes when only the top 3 tracks are considered.
+  
+### **🔍 Observations**
+- After filtering for the **Top 3 tracks**, the order of the artists changed significantly, indicating the importance of **hit tracks** in driving an artist's popularity.
+- **Excel Limitation:** Due to Excel’s limitations, we could not further analyze **percentage contributions** or **skip rate**. Hence, we have decided to proceed with **SQL** for deeper insights into **artist dependency**, **skip rates**, and more detailed calculations.
+
+---
+
+### **🔧 Why We Moved to SQL**
+While Excel provided a basic overview of artist playtimes and song contributions, we encountered several limitations:
+1. **Complex Calculations:** Excel was not suitable for calculating percentages or detailed analytics such as comparing an artist's top 3 tracks' contribution to their total playtime.
+2. **Data Complexity:** Managing large data sets and performing advanced analytics (like calculating the percentage of total playtime from the top 3 songs) was inefficient in Excel.
+3. **Next Steps:** We chose **SQL** for more efficient querying, aggregation, and calculation to handle these types of questions.
+
