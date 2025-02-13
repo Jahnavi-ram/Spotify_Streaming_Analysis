@@ -563,3 +563,108 @@ LIMIT 10;
 - **Users may engage more deeply at night**, possibly due to relaxed environments or personal preferences.
 
 ---
+
+### 19. Unique Listeners Per Song
+
+**Query:**
+
+```sql
+SELECT track_name, 
+       COUNT(DISTINCT track_id) AS unique_listeners
+FROM spotify_history
+GROUP BY track_name
+ORDER BY unique_listeners DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| track_name                                  | unique_listeners |
+| ------------------------------------------- | ---------------- |
+| Closer                                      | 10              |
+| La vie en rose                              | 10              |
+| Ella                                        | 9               |
+| Wake Up                                     | 8               |
+| All I Need                                  | 8               |
+| The Way You Look Tonight                    | 8               |
+| Master of the House                         | 8               |
+| Run                                         | 8               |
+| It's Beginning to Look a Lot like Christmas | 8               |
+| Lost in My Mind                             | 7               |
+
+**Quick Insight:**
+
+- **Popular songs attract a diverse audience**, but some songs have a limited but engaged listener base.
+- **Holiday songs and classics** appear frequently, suggesting seasonal trends in streaming behavior.
+
+---
+
+### 20. Unique Listeners Per Artist
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       COUNT(DISTINCT track_id) AS unique_listeners
+FROM spotify_history
+GROUP BY artist_name
+ORDER BY unique_listeners DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name         | unique_listeners |
+| ------------------- | ---------------- |
+| The Beatles        | 472              |
+| The Killers        | 240              |
+| Paul McCartney     | 180              |
+| The Black Keys     | 173              |
+| John Mayer        | 156              |
+| The Rolling Stones | 149              |
+| Radiohead         | 135              |
+| Imagine Dragons   | 116              |
+| The Kinks         | 115              |
+| Bob Dylan         | 106              |
+
+**Quick Insight:**
+
+- **The Beatles dominate unique listener counts**, highlighting their broad and lasting appeal.
+- **Rock and alternative bands** appear frequently, suggesting high engagement in these genres.
+
+---
+
+### 21. Unique Listeners Per Album
+
+**Query:**
+
+```sql
+SELECT album_name, 
+       COUNT(DISTINCT track_id) AS unique_listeners
+FROM spotify_history
+GROUP BY album_name
+ORDER BY unique_listeners DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| album_name                     | unique_listeners |
+| ------------------------------- | ---------------- |
+| The Beatles                    | 137              |
+| Brothers                        | 64               |
+| Live At The BBC                 | 62               |
+| Revolver                        | 52               |
+| A Star Is Born Soundtrack       | 49               |
+| All Things Must Pass            | 48               |
+| The Queen's Gambit Soundtrack   | 41               |
+| Les Misérables Soundtrack      | 41               |
+| Selección Especial             | 40               |
+| The Velvet Underground          | 40               |
+
+**Quick Insight:**
+
+- **The Beatles once again top the list**, reinforcing their cross-generational appeal.
+- **Soundtracks from movies and TV series** attract a diverse audience, showing the power of media influence on music streaming trends.
+
+---
