@@ -196,6 +196,38 @@ LIMIT 10;
 
 ---
 
+### 7. Skip Rate per Song
+**Query:**
+```sql
+SELECT track_name,
+       COUNT(*) AS total_plays,
+       SUM(skipped) AS total_skips,
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY track_name
+ORDER BY total_plays DESC
+LIMIT 10;
+```
+**Output:**
+| track_name | total_plays | total_skips | skip_rate |
+|------------|------------|------------|-----------|
+| Ode To The Mets | 203 | 1 | 0.49 |
+| In the Blood | 180 | 1 | 0.56 |
+| Dying Breed | 166 | 2 | 1.20 |
+| Caution | 155 | 2 | 1.29 |
+| 19 Dias y 500 Noches - En Directo | 146 | 5 | 3.42 |
+| Concerning Hobbits | 142 | 7 | 4.93 |
+| Come Together - Remastered 2009 | 136 | 2 | 1.47 |
+| All These Things That I've Done | 136 | 3 | 2.21 |
+| For What It's Worth | 135 | 1 | 0.74 |
+| The Boxer | 134 | 5 | 3.73 |
+
+**Quick Insight:**
+- The **lowest skip rate** is observed in highly played tracks like "Ode To The Mets" and "In the Blood," suggesting strong audience engagement.
+- **Higher skip rates** for songs like "Concerning Hobbits" and "The Boxer" suggest they might be skipped after partial listens.
+
+---
+
 ### 8. Skipped Songs by Platform
 **Query:**
 ```sql
@@ -257,5 +289,3 @@ LIMIT 10;
 - **Bob Dylan and John Mayer** also rank high, indicating that **folk/acoustic music may be more subject to skipping behaviors**.
 
 ---
-
-
