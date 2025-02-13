@@ -129,4 +129,72 @@ LIMIT 10;
 - **Classic rock albums**, such as *Abbey Road* and *The Wall*, remain highly streamed, proving their longevity in listener preferences.
 
 ---
+## 5. Most Played Songs within Each Album
+
+### Query:
+```sql
+SELECT album_name,
+       track_name,
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY album_name, track_name
+ORDER BY total_playtime DESC
+LIMIT 10;
+```
+
+### Output:
+| album_name | track_name | total_playtime |
+|------------|-----------|---------------|
+| The New Abnormal | Ode To The Mets | 66024432 |
+| The Lord of the Rings: The Return of the King | The Return of the King (feat. Sir James Galway,...) | 64401661 |
+| The Lord of the Rings - The Return of the King -... | The Fellowship Reunited (feat. Sir James Galway,...) | 44756730 |
+| Nos Sobran Los Motivos | 19 Dias y 500 Noches - En Directo | 42375027 |
+| The Search for Everything | In the Blood | 38183421 |
+| The Lord of the Rings: The Fellowship of the Ring | The Breaking of the Fellowship (feat. "In Dreams") | 35990898 |
+| Unforgiven - Original Motion Picture Soundtrack | Claudia's Theme - Version Eight | 35411570 |
+| The Lord of the Rings: The Fellowship of the Ring | The Road Goes Ever On..., Pt. 1 | 35236377 |
+| Hot Fuss | All These Things That I've Done | 34247045 |
+| La La Land | Epilogue | 31740096 |
+
+### Quick Insights:
+- **"Ode To The Mets"** from *The New Abnormal* leads in total playtime among album tracks.
+- Soundtracks from **"The Lord of the Rings"** dominate the top 10, confirming a high level of engagement with cinematic scores.
+- **"Hot Fuss"** and *The Search for Everything* have standout tracks with substantial streaming time.
+- **"La La Land"** soundtrack’s *Epilogue* secures a spot, showing that movie soundtracks attract significant listenership beyond just The Lord of the Rings.
+
+---
+
+### 6. Most Skipped Songs
+**Query:**
+```sql
+SELECT track_name, 
+       COUNT(*) AS skip_count
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY track_name
+ORDER BY skip_count DESC
+LIMIT 10;
+```
+**Output:**
+| track_name | skip_count |
+|------------|-----------|
+| Paraíso | 29 |
+| Photograph | 22 |
+| Superheroes | 21 |
+| Switzerland | 20 |
+| What Do You Mean? | 20 |
+| Old Thing Back (feat. Ja Rule and Ralph Tresvant) | 19 |
+| Diez Mil Maneras | 18 |
+| Drag Me Down | 18 |
+| La Buena y la Mala | 15 |
+| Stitches | 14 |
+
+**Quick Insight:**
+- **"Paraíso" has the highest skip count**, which may indicate **lack of engagement** or frequent accidental plays.
+- Popular tracks like **"Photograph" and "Superheroes"** have relatively high skip counts, suggesting that even **mainstream songs** can have a divisive audience.
+- **Skipping behavior** might be influenced by mood, genre, or user expectations.
+
+
+
+
 
