@@ -194,7 +194,68 @@ LIMIT 10;
 - Popular tracks like **"Photograph" and "Superheroes"** have relatively high skip counts, suggesting that even **mainstream songs** can have a divisive audience.
 - **Skipping behavior** might be influenced by mood, genre, or user expectations.
 
+---
 
+### 8. Skipped Songs by Platform
+**Query:**
+```sql
+SELECT track_name, 
+       platform, 
+       SUM(skipped) AS total_skips
+FROM spotify_history
+GROUP BY track_name, platform
+ORDER BY total_skips DESC
+LIMIT 10;
+```
+**Output:**
+| track_name | platform | total_skips |
+|------------|---------|------------|
+| Paraíso | android | 26 |
+| Photograph | android | 22 |
+| Superheroes | android | 21 |
+| Switzerland | android | 20 |
+| Diez Mil Maneras | android | 18 |
+| What Do You Mean? | android | 18 |
+| Old Thing Back (feat. Ja Rule and Ralph Tresvant) | android | 18 |
+| Drag Me Down | android | 16 |
+| La Buena y la Mala | android | 15 |
+| All of Me | android | 14 |
 
+**Quick Insight:**
+- **Most skipped songs are on Android**, which may indicate platform-specific listening behavior.
+- Some globally popular songs like "Photograph" have high skips, suggesting **audience division** in engagement.
+
+---
+
+### 9. Most Skipped Artists
+**Query:**
+```sql
+SELECT artist_name, 
+       COUNT(*) AS total_skips
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY artist_name
+ORDER BY total_skips DESC
+LIMIT 10;
+```
+**Output:**
+| artist_name | total_skips |
+|-------------|------------|
+| The Beatles | 388 |
+| The Killers | 197 |
+| Bob Dylan | 163 |
+| John Mayer | 153 |
+| Led Zeppelin | 128 |
+| The Rolling Stones | 125 |
+| The Script | 121 |
+| Imagine Dragons | 116 |
+| Paul McCartney | 107 |
+| Radiohead | 102 |
+
+**Quick Insight:**
+- **The Beatles and The Killers** have the most skipped songs, possibly due to **widely known discographies** where users may skip tracks they’re already familiar with.
+- **Bob Dylan and John Mayer** also rank high, indicating that **folk/acoustic music may be more subject to skipping behaviors**.
+
+---
 
 
