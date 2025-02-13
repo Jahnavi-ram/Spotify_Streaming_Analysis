@@ -99,4 +99,34 @@ LIMIT 10;
 
 ---
 
+### 4. Most Played Album
+**Query:**
+```sql
+SELECT album_name, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY album_name
+ORDER BY total_playtime DESC
+LIMIT 10;
+```
+**Output:**
+| album_name | total_playtime |
+|------------|---------------|
+| The Beatles | 185235243 |
+| The New Abnormal | 179196017 |
+| Imploding The Mirage | 159921153 |
+| Abbey Road | 148058049 |
+| Blood On The Tracks | 144770276 |
+| Past Masters | 144612032 |
+| Hot Fuss | 140206062 |
+| The Wall | 138117224 |
+| Pressure Machine | 113324404 |
+| Where the Light Is: John Mayer Live In Los Angeles | 111894126 |
+
+**Quick Insight:**
+- **The Beatles** dominate album streaming, reinforcing their **timeless popularity**.
+- **Modern rock albums** like *The New Abnormal* and *Imploding The Mirage* hold high engagement, suggesting strong followings for newer releases.
+- **Classic rock albums**, such as *Abbey Road* and *The Wall*, remain highly streamed, proving their longevity in listener preferences.
+
+
 
