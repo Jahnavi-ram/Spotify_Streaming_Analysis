@@ -353,3 +353,39 @@ LIMIT 10;
 - **Skip rates vary significantly by second**, showing that some tracks may be skipped almost instantly after playing.
 
 ---
+
+## 12. Total Playtime, Skip Count, and Skip Rate per Song
+
+### Query:
+```sql
+SELECT track_name, 
+       SUM(ms_played) AS total_playtime, 
+       SUM(skipped) AS total_skips, 
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY track_name
+ORDER BY total_playtime DESC
+LIMIT 10;
+```
+
+### Output:
+| track_name | total_playtime | total_skips | skip_rate |
+|------------|---------------|-------------|-----------|
+| Ode To The Mets | 66024432 | 1 | 0.49 |
+| The Return of the King (feat. Sir James Galway,...) | 64401661 | 2 | 1.67 |
+| The Fellowship Reunited (feat. Sir James Galway,...) | 44756730 | 2 | 2.56 |
+| 19 Dias y 500 Noches - En Directo | 42375027 | 5 | 3.42 |
+| In the Blood | 38183421 | 1 | 0.56 |
+| Claudia's Theme - Version Eight | 37120900 | 4 | 3.25 |
+| Dying Breed | 36182653 | 2 | 1.20 |
+| The Breaking of the Fellowship (feat. "In Dreams") | 35990898 | 2 | 2.15 |
+| The Road Goes Ever On..., Pt. 1 | 35236377 | 1 | 0.83 |
+| All These Things That I've Done | 34247045 | 3 | 2.21 |
+
+### Quick Insights:
+- **Top streamed songs show minimal skip rates**, indicating high listener retention.
+- **"19 Dias y 500 Noches - En Directo" and "Claudia's Theme"** have slightly higher skip rates, possibly due to length or niche appeal.
+- **Popular tracks like "Ode To The Mets" and "In the Blood"** have exceptionally low skip rates, reinforcing their strong engagement with listeners.
+
+---
+
