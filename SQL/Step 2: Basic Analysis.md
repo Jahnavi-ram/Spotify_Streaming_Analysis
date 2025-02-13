@@ -389,3 +389,91 @@ LIMIT 10;
 
 ---
 
+### 13. Playtime vs. Skip Rate Over Time
+**Query:**
+```sql
+SELECT date, 
+       SUM(ms_played) AS total_playtime, 
+       SUM(skipped) AS total_skips, 
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY date
+ORDER BY date DESC
+LIMIT 10;
+```
+**Output:**
+| date | total_playtime | total_skips | skip_rate |
+|------------|------------|------------|-----------|
+| 2024-12-15 | 1528465 | 24 | 80.00 |
+| 2024-12-14 | 2339086 | 0 | 0.00 |
+| 2024-12-13 | 386200 | 0 | 0.00 |
+| 2024-12-10 | 2696131 | 47 | 83.93 |
+| 2024-12-09 | 779859 | 2 | 33.33 |
+| 2024-12-08 | 450337 | 13 | 76.47 |
+| 2024-12-07 | 2344982 | 9 | 45.00 |
+| 2024-12-01 | 1573854 | 1 | 12.50 |
+| 2024-11-30 | 7686626 | 5 | 12.82 |
+| 2024-11-29 | 3496347 | 49 | 80.33 |
+
+**Quick Insight:**
+- **High skip rates** on certain dates suggest potential shifts in user behavior or trending releases.
+- **December 10 and November 29** saw extremely high skip rates, indicating that users may have been sampling songs more often than usual.
+
+---
+
+### 14. Playtime vs. Skip Rate by Platform
+**Query:**
+```sql
+SELECT platform, 
+       SUM(ms_played) AS total_playtime, 
+       SUM(skipped) AS total_skips, 
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY platform
+ORDER BY total_playtime DESC;
+```
+**Output:**
+| platform | total_playtime | total_skips | skip_rate |
+|------------|------------|------------|-----------|
+| android | 17475600446 | 7245 | 5.19 |
+| cast to device | 555355794 | 0 | 0.00 |
+| iOS | 502951091 | 313 | 10.27 |
+| mac | 251908949 | 72 | 6.12 |
+| windows | 233763391 | 238 | 14.07 |
+| web player | 19841749 | 0 | 0.00 |
+
+**Quick Insight:**
+- **Android dominates total playtime**, but Windows has the **highest skip rate at 14.07%**.
+- **Casting to devices and web players** have **zero skips**, indicating more passive listening experiences.
+
+---
+
+### 15. Average Playtime Before Skipping
+**Query:**
+```sql
+SELECT track_name, 
+       ROUND(AVG(ms_played), 2) AS avg_playtime_before_skip
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY track_name
+ORDER BY avg_playtime_before_skip DESC;
+```
+**Output:**
+| track_name | avg_playtime_before_skip |
+|------------|------------------------|
+| Human Sadness | 1142390.00 |
+| Calmante | 481906.00 |
+| Stuck Inside of Mobile with the Memphis Blues | 421349.00 |
+| Up&Up | 385409.00 |
+| Whatever - Remastered | 357917.00 |
+| Romeo And Juliet | 355053.00 |
+| Champagne Supernova - Remastered | 345869.00 |
+| Sexual Healing - Kygo Remix | 340855.00 |
+| In the Evening - Remaster | 321301.00 |
+| Like It Is - Remastered | 314707.00 |
+
+**Quick Insight:**
+- **"Human Sadness" has the longest average playtime before skipping**, suggesting strong engagement before users eventually move on.
+- **Songs with high average playtime before skips** tend to be **longer tracks or emotionally deep compositions**.
+
+---
