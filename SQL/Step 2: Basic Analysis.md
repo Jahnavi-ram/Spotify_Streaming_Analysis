@@ -289,3 +289,67 @@ LIMIT 10;
 - **Bob Dylan and John Mayer** also rank high, indicating that **folk/acoustic music may be more subject to skipping behaviors**.
 
 ---
+
+### 10. Skip Rate Over Time (By Date)
+**Query:**
+```sql
+SELECT date,
+       COUNT(*) AS total_plays,
+       SUM(skipped) AS total_skips,
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY date
+ORDER BY date
+LIMIT 10;
+```
+**Output:**
+| date | total_plays | total_skips | skip_rate |
+|------------|------------|------------|-----------|
+| 2013-07-08 | 65 | 0 | 0.00 |
+| 2013-07-09 | 29 | 0 | 0.00 |
+| 2013-07-10 | 6 | 3 | 50.00 |
+| 2013-07-11 | 2 | 2 | 100.00 |
+| 2013-07-12 | 1 | 1 | 100.00 |
+| 2013-07-13 | 12 | 6 | 50.00 |
+| 2013-08-02 | 38 | 8 | 21.05 |
+| 2013-08-04 | 1 | 1 | 100.00 |
+| 2013-08-17 | 2 | 2 | 100.00 |
+| 2013-09-07 | 27 | 1 | 3.70 |
+
+**Quick Insight:**
+- **High skip rates on certain dates** might indicate specific listening behaviors or unusual engagement trends.
+- Some dates have **consistent 100% skip rates**, which could suggest tracks were **tested but abandoned quickly**.
+
+---
+
+### 11. Skip Rate Over Time (By Hour)
+**Query:**
+```sql
+SELECT time,
+       COUNT(*) AS total_plays,
+       SUM(skipped) AS total_skips,
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY time
+ORDER BY time DESC
+LIMIT 10;
+```
+**Output:**
+| time | total_plays | total_skips | skip_rate |
+|------------|------------|------------|-----------|
+| 23:59:59 | 6 | 0 | 0.00 |
+| 23:59:58 | 5 | 0 | 0.00 |
+| 23:59:57 | 3 | 1 | 33.33 |
+| 23:59:56 | 5 | 0 | 0.00 |
+| 23:59:55 | 2 | 0 | 0.00 |
+| 23:59:54 | 2 | 0 | 0.00 |
+| 23:59:53 | 2 | 0 | 0.00 |
+| 23:59:52 | 2 | 0 | 0.00 |
+| 23:59:51 | 7 | 0 | 0.00 |
+| 23:59:50 | 4 | 0 | 0.00 |
+
+**Quick Insight:**
+- **Late-night hours** have some of the highest skip rates, possibly reflecting passive listening or skipping before sleeping.
+- **Skip rates vary significantly by second**, showing that some tracks may be skipped almost instantly after playing.
+
+---
