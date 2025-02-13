@@ -477,3 +477,89 @@ ORDER BY avg_playtime_before_skip DESC;
 - **Songs with high average playtime before skips** tend to be **longer tracks or emotionally deep compositions**.
 
 ---
+
+### 16. Playtime Before Skipping by Platform
+**Query:**
+```sql
+SELECT platform, 
+       ROUND(AVG(ms_played), 2) AS avg_playtime_before_skip
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY platform
+ORDER BY avg_playtime_before_skip DESC;
+```
+**Output:**
+| platform | avg_playtime_before_skip |
+|------------|------------------------|
+| iOS | 66623.36 |
+| mac | 57723.22 |
+| windows | 33847.54 |
+| android | 29524.11 |
+
+**Quick Insight:**
+- **iOS users listen significantly longer** before skipping a song compared to Android users.
+- **Mobile users (Android, iOS) have different engagement patterns**, with iOS users engaging more with tracks before skipping.
+
+---
+
+### 17. Playtime Before Skipping by Artist
+**Query:**
+```sql
+SELECT artist_name, 
+       ROUND(AVG(ms_played), 2) AS avg_playtime_before_skip
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY artist_name
+ORDER BY avg_playtime_before_skip DESC
+LIMIT 10;
+```
+**Output:**
+| artist_name | avg_playtime_before_skip |
+|------------|------------------------|
+| Musica Relajante | 481906.00 |
+| Dire Straits | 355053.00 |
+| Marvin Gaye | 340855.00 |
+| Yusef Lateef | 314707.00 |
+| Maino | 304626.00 |
+| Ptaki | 288055.00 |
+| Ben Howard | 282221.00 |
+| Manic Street Preachers | 275001.00 |
+| Le Flex | 273552.00 |
+| Peter Sarstedt | 257282.00 |
+
+**Quick Insight:**
+- **Musica Relajante leads with the longest average listening time before skipping**, indicating strong user retention.
+- **Classic and relaxing music artists** tend to hold listeners' attention for longer durations.
+
+---
+
+### 18. Playtime Before Skipping by Time of Day
+**Query:**
+```sql
+SELECT time, 
+       ROUND(AVG(ms_played), 2) AS avg_playtime_before_skip
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY time
+ORDER BY time DESC
+LIMIT 10;
+```
+**Output:**
+| time | avg_playtime_before_skip |
+|------------|------------------------|
+| 23:59:57 | 4812.00 |
+| 23:59:44 | 75040.00 |
+| 23:59:42 | 45743.00 |
+| 23:59:25 | 156742.00 |
+| 23:59:06 | 68214.00 |
+| 23:59:03 | 11272.00 |
+| 23:58:55 | 12645.00 |
+| 23:58:54 | 4718.00 |
+| 23:58:49 | 101320.00 |
+| 23:58:44 | 168716.00 |
+
+**Quick Insight:**
+- **Late-night listening trends show varied engagement**, with some tracks played significantly longer before skipping.
+- **Users may engage more deeply at night**, possibly due to relaxed environments or personal preferences.
+
+---
