@@ -773,3 +773,112 @@ LIMIT 10;
 
 ---
 
+### 25. Skip Rate per Artist
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       COUNT(*) AS total_plays, 
+       SUM(skipped) AS total_skips, 
+       ROUND((SUM(skipped) / COUNT(*)) * 100, 2) AS skip_rate
+FROM spotify_history
+GROUP BY artist_name
+ORDER BY skip_rate DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name            | total_plays | total_skips | skip_rate |
+|-----------------------|------------|------------|-----------|
+| Alejandro Santamaria  | 1          | 1          | 100.00%   |
+| Alesso               | 2          | 2          | 100.00%   |
+| AFROJACK             | 2          | 2          | 100.00%   |
+| & Friends            | 1          | 1          | 100.00%   |
+| A Great Big World    | 1          | 1          | 100.00%   |
+| ABBY                 | 1          | 1          | 100.00%   |
+| A Day To Remember    | 1          | 1          | 100.00%   |
+| Abdullah Ibrahim     | 1          | 1          | 100.00%   |
+| Adriana              | 1          | 1          | 100.00%   |
+| Alex Aiono           | 1          | 1          | 100.00%   |
+
+**Quick Insight:**
+
+- **Smaller artists or lesser-known tracks tend to have high skip rates**, likely due to user discovery and disengagement.
+- **High skip rates don't necessarily indicate poor quality**, but rather a mismatch between listener expectations and the track.
+
+---
+
+### 26. Skipped Songs per Artist by Platform
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       platform, 
+       COUNT(*) AS total_skips
+FROM spotify_history
+WHERE skipped = 1
+GROUP BY artist_name, platform
+ORDER BY total_skips DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name        | platform | total_skips |
+|-------------------|---------|-------------|
+| The Beatles      | Android | 372         |
+| The Killers      | Android | 186         |
+| Bob Dylan        | Android | 155         |
+| John Mayer       | Android | 138         |
+| The Rolling Stones | Android | 121       |
+| The Script       | Android | 117         |
+| Led Zeppelin     | Android | 116         |
+| Paul McCartney   | Android | 107         |
+| Imagine Dragons  | Android | 104         |
+| Radiohead        | Android | 96          |
+
+**Quick Insight:**
+
+- **Most skips occur on Android**, reinforcing the idea that mobile users may browse and skip more frequently.
+- **Classic rock artists dominate the skipped songs list**, possibly indicating listeners trying out older music but not always committing.
+
+---
+
+### 27. Most Diverse Artists
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       COUNT(DISTINCT track_name) AS unique_songs_played
+FROM spotify_history
+GROUP BY artist_name
+ORDER BY unique_songs_played DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name         | unique_songs_played |
+|-------------------|-------------------|
+| The Beatles      | 470               |
+| Paul McCartney   | 155               |
+| The Killers      | 155               |
+| John Mayer       | 115               |
+| The Rolling Stones | 111             |
+| The Black Keys   | 101               |
+| Bob Dylan        | 100               |
+| Howard Shore     | 98                |
+| Led Zeppelin     | 94                |
+| Johnny Cash      | 84                |
+
+**Quick Insight:**
+
+- **The Beatles lead in diversity**, showing their extensive catalog remains in active listening.
+- **Paul McCartney appears separately**, reinforcing his impact both within and outside The Beatles.
+- **Artists with large discographies tend to engage listeners across multiple tracks**, indicating strong fan loyalty and breadth of content.
+
+---
