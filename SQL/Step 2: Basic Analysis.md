@@ -981,3 +981,180 @@ ORDER BY artist_name, date;
 
 - **The Beatles and John Mayer show strong cumulative playtime, indicating loyal listeners.**
 
+---
+
+## Spotify Streaming Data Analysis
+
+### 31. Total Playtime by Hour of the Day
+
+**Query:**
+
+```sql
+SELECT HOUR(time) AS hour_of_day, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY hour_of_day
+ORDER BY total_playtime DESC;
+```
+
+**Output:**
+
+| hour_of_day | total_playtime |
+|------------|---------------|
+| 17         | 1351563788    |
+| 18         | 1350938743    |
+| 0          | 1307687827    |
+| 20         | 1290339746    |
+| 19         | 1255758092    |
+
+**Quick Insight:**
+- **Peak listening hours** occur in the evening (17-20), suggesting users stream the most after work or school.
+- **Midnight (00:00) also sees a high playtime**, indicating late-night listeners.
+
+---
+
+### 32. Playtime by Hour and Platform
+
+**Query:**
+
+```sql
+SELECT HOUR(time) AS hour_of_day, 
+       platform, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY hour_of_day, platform
+ORDER BY total_playtime DESC;
+```
+
+**Output:**
+
+| hour_of_day | platform | total_playtime |
+|------------|---------|---------------|
+| 0          | Android | 1235078999    |
+| 20         | Android | 1196416932    |
+| 17         | Android | 1183049318    |
+| 18         | Android | 1181879179    |
+| 23         | Android | 1163481760    |
+
+**Quick Insight:**
+- **Android dominates streaming activity across peak hours.**
+- **Evening hours show consistently high playtime across platforms.**
+
+---
+
+### 33. Total Playtime by Day of the Week
+
+**Query:**
+
+```sql
+SELECT DAYOFWEEK(date) AS day_of_week, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY day_of_week
+ORDER BY total_playtime DESC;
+```
+
+**Output:**
+
+| day_of_week | total_playtime |
+|------------|---------------|
+| 6          | 3151923524    |
+| 4          | 2914013128    |
+| 5          | 2822443538    |
+| 3          | 2740855597    |
+| 2          | 2718492272    |
+
+**Quick Insight:**
+- **Weekends (Friday & Saturday) see the highest playtime, indicating users stream more music during leisure time.**
+- **Midweek days like Tuesday and Wednesday have lower playtime compared to weekends.**
+
+---
+
+### 34. Playtime by Day of the Week and Platform
+
+**Query:**
+
+```sql
+SELECT DAYOFWEEK(date) AS day_of_week, 
+       platform, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY day_of_week, platform
+ORDER BY total_playtime DESC;
+```
+
+**Output:**
+
+| day\_of\_week | platform | total\_playtime |
+| ------------- | -------- | --------------- |
+| 6             | Android  | 2890527396      |
+| 5             | Android  | 2544254381      |
+| 4             | Android  | 2517045124      |
+| 2             | Android  | 2506268390      |
+| 3             | Android  | 2470333303      |
+
+**Quick Insight:**
+
+- **Android users dominate streaming on weekends, showing strong engagement across devices.**
+- **Midweek streaming is also strong on Android, while platforms like iOS and macOS show lower engagement.**
+
+---
+
+### 35. Total Playtime Per Month
+
+**Query:**
+
+```sql
+SELECT MONTH(date) AS month, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY month
+ORDER BY total_playtime DESC;
+```
+
+**Output:**
+
+| month | total\_playtime |
+| ----- | --------------- |
+| 10    | 2001387314      |
+| 9     | 1926357913      |
+| 8     | 1826508405      |
+| 11    | 1744434171      |
+| 12    | 1537761504      |
+
+**Quick Insight:**
+
+- **October has the highest streaming playtime, possibly due to new music releases or seasonal listening trends.**
+- **Late summer and early fall (August to October) seem to have peak engagement.**
+
+---
+
+### 36. Playtime Per Month and Platform
+
+**Query:**
+
+```sql
+SELECT MONTH(date) AS month, 
+       platform, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY month, platform
+ORDER BY total_playtime DESC;
+```
+
+**Output:**
+
+| month | platform | total\_playtime |
+| ----- | -------- | --------------- |
+| 10    | Android  | 1981508461      |
+| 9     | Android  | 1862314874      |
+| 11    | Android  | 1741459182      |
+| 8     | Android  | 1589369977      |
+| 12    | Android  | 1502513870      |
+
+**Quick Insight:**
+
+- **Android users contribute significantly to the highest streaming months.**
+- **There is consistent monthly engagement, with peak listening between August and December.**
+
+---
