@@ -882,3 +882,102 @@ LIMIT 10;
 - **Artists with large discographies tend to engage listeners across multiple tracks**, indicating strong fan loyalty and breadth of content.
 
 ---
+
+### 28. Artist Dependency on Top Songs
+
+**Query:**
+
+```sql
+WITH ArtistTopSongs AS (
+    SELECT artist_name, 
+           track_name, 
+           SUM(ms_played) AS total_playtime,
+           RANK() OVER(PARTITION BY artist_name ORDER BY SUM(ms_played) DESC) AS song_rank
+    FROM spotify_history
+    GROUP BY artist_name, track_name
+)
+SELECT artist_name, track_name, total_playtime, song_rank
+FROM ArtistTopSongs
+WHERE song_rank <= 3
+ORDER BY total_playtime DESC, song_rank, artist_name;
+```
+
+**Output:**
+
+| artist_name   | track_name             | total_playtime | song_rank |
+| -------------- | ----------------------- | --------------- | ---------- |
+| The Strokes    | Ode To The Mets         | 66024432        | 1          |
+| Howard Shore   | The Return of the King  | 64401661        | 1          |
+| Howard Shore   | The Fellowship Reunited | 44756730        | 2          |
+| Joaquin Sabina | 19 Dias y 500 Noches    | 42375027        | 1          |
+| John Mayer     | In the Blood            | 38183421        | 1          |
+
+**Quick Insight:**
+
+- **Some artists rely heavily on their top hits**, making up the bulk of their streaming playtime.
+- **Howard Shore’s top-ranking tracks indicate a strong engagement with The Lord of the Rings soundtrack.**
+
+---
+
+### 29. Total Playtime per Artist by Date
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       date, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY artist_name, date
+ORDER BY date DESC, total_playtime DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name   | date       | total_playtime |
+| -------------- | ---------- | --------------- |
+| James Bay     | 2024-12-15 | 280293          |
+| John Mayer    | 2024-12-15 | 246709          |
+| The Fray      | 2024-12-15 | 219600          |
+| Pink Floyd    | 2024-12-15 | 217817          |
+| Kings of Leon | 2024-12-15 | 185373          |
+
+**Quick Insight:**
+
+- **John Mayer and The Fray continue to have strong engagement.**
+- **Pink Floyd’s playtime suggests continued relevance for classic rock.**
+
+---
+
+### 30. Cumulative Playtime for Artists Over Time
+
+**Query:**
+
+```sql
+WITH ArtistPlaytime AS (
+    SELECT artist_name, 
+           date, 
+           SUM(ms_played) AS total_playtime
+    FROM spotify_history
+    GROUP BY artist_name, date
+)
+SELECT artist_name, 
+       date, 
+       SUM(total_playtime) OVER(PARTITION BY artist_name ORDER BY date) AS cumulative_playtime
+FROM ArtistPlaytime
+ORDER BY artist_name, date;
+```
+
+**Output:**
+
+| artist_name   | date       | cumulative_playtime |
+| -------------- | ---------- | ------------------- |
+| The Beatles   | 2024-12-15 | 1199266824          |
+| John Mayer    | 2024-12-15 | 711857923           |
+| Pink Floyd    | 2024-12-15 | 256672182           |
+
+**Quick Insight:**
+
+- **The Beatles and John Mayer show strong cumulative playtime, indicating loyal listeners.**
+
