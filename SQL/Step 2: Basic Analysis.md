@@ -668,3 +668,108 @@ LIMIT 10;
 - **Soundtracks from movies and TV series** attract a diverse audience, showing the power of media influence on music streaming trends.
 
 ---
+
+### 22. Unique Listeners Per Platform
+
+**Query:**
+
+```sql
+SELECT platform, 
+       COUNT(DISTINCT track_id) AS unique_listeners
+FROM spotify_history
+GROUP BY platform
+ORDER BY unique_listeners DESC;
+```
+
+**Output:**
+
+| platform         | unique_listeners |
+| --------------- | ---------------- |
+| Android         | 15296            |
+| iOS            | 1824             |
+| Cast to Device  | 1607             |
+| Windows        | 1379             |
+| Mac            | 725              |
+| Web Player     | 156              |
+
+**Quick Insight:**
+
+- **Android dominates the streaming platforms**, possibly due to its larger global user base.
+- **Cast to Device is a significant category**, suggesting that users frequently stream music to external devices rather than listening on phones or computers.
+- **Web Player has the least engagement**, indicating that most users prefer mobile or dedicated desktop applications.
+
+---
+
+### 23. Total Playtime Per Artist
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY artist_name
+ORDER BY total_playtime DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name        | total_playtime  |
+| ----------------- | --------------- |
+| The Beatles      | 1199266824      |
+| The Killers      | 1032358097      |
+| John Mayer       | 711857923       |
+| Bob Dylan        | 562469786       |
+| Paul McCartney   | 354847303       |
+| Howard Shore     | 348814429       |
+| The Strokes      | 309039213       |
+| The Rolling Stones | 302676295    |
+| Pink Floyd       | 256672182       |
+| Led Zeppelin     | 246279115       |
+
+**Quick Insight:**
+
+- **The Beatles maintain the highest total playtime**, emphasizing their consistent popularity across generations.
+- **Rock and classic artists dominate**, showing long-term fan engagement.
+- **Howard Shore, a film composer, appears**, indicating strong streaming numbers for movie soundtracks.
+
+---
+
+### 24. Playtime Per Artist by Platform
+
+**Query:**
+
+```sql
+SELECT artist_name, 
+       platform, 
+       SUM(ms_played) AS total_playtime
+FROM spotify_history
+GROUP BY artist_name, platform
+ORDER BY total_playtime DESC
+LIMIT 10;
+```
+
+**Output:**
+
+| artist_name       | platform | total_playtime  |
+| ---------------- | -------- | --------------- |
+| The Beatles      | Android  | 1116742342      |
+| The Killers      | Android  | 892268260       |
+| John Mayer       | Android  | 612892956       |
+| Bob Dylan        | Android  | 505607295       |
+| Howard Shore     | Android  | 345429286       |
+| Paul McCartney   | Android  | 341984317       |
+| The Strokes      | Android  | 269623432       |
+| The Rolling Stones | Android  | 267829573    |
+| Pink Floyd       | Android  | 237243947       |
+| Imagine Dragons  | Android  | 227022264       |
+
+**Quick Insight:**
+
+- **Android is the dominant platform for streaming across all major artists**, reinforcing its high user base.
+- **The Beatles and The Killers have exceptionally high playtime on mobile**, possibly due to their broad appeal.
+- **Classic rock artists dominate**, indicating a strong preference for older music among mobile users.
+
+---
+
